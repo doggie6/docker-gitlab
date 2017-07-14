@@ -1,0 +1,36 @@
+version: '2.1'
+
+services:
+  gitlab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        buildno: 1
+    image: doggie6/gitlab:9.3.4-ce.0
+    restart: always
+    command: ["assets/wrapper"]
+    entrypoint: ["/root/entrypoint.sh"]
+    container_name: gitlab
+    hostname: gitlab.test.com
+    volumes:
+#      - /Users/sunday/gitlab/config:/etc/gitlab
+#      - /Users/sunday/gitlab/data:/var/opt/gitlab
+#      - /Users/sunday/gitlab/logs:/var/log/gitlab
+       - volume-gitlab-data:/var/opt/gitlab
+       - volume-gitlab-logs:/var/log/gitlab
+       - volume-gitlab-config:/etc/gitlab
+    ports:
+      - "10080:10080"
+      - "10022:22"
+      - "10443:443"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.test.com:10080'
+        gitlab_rails['gitlab_shell_ssh_port'] = 10022
+#       Add any other gitlab.rb configuration here, each on its own line
+
+volumes:
+  volume-gitlab-data: {}
+  volume-gitlab-logs: {}
+  volume-gitlab-config: {}
