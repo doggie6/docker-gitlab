@@ -28,7 +28,11 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.test.com:10080'
         gitlab_rails['gitlab_shell_ssh_port'] = 10022
+        gitlab_rails['initial_root_password'] = "password"
+        gitlab_rails['initial_shared_runners_registration_token'] = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF4r8FxZCi6Nt9bxeT5xRehDLCH6iY5FqQykO9oKiBUr1+4FdafHhdzBvwaNKckqvDVFNQdO2WPRsdjmxhOcZESa9a7znUXVL5qMc6ebi59sqWdSSgKyCF/ginqXQxg0SbiOY2tdIBTQhZY5KUIQMuEDZ4h5luf94YCglSNZe4Vgas1u6Him5wD3Gqw93TVhgKdIyWxbz6v9lRICVt7RGXzetXhO+aEDDGyL2ZWiUBnPJpFuCzQgbKVb1Pl1t8pYGldk77nsO3MnPAwGQEWWvsWNlzyLZ2vVKzvKKVMFi0HdZfJQ+/0rsMBOUvfUJmiJ3JZREAAmjtdw2s7WgXtxfn"
+        gitlab_rails['time_zone'] = 'Asia/Shanghai'
 #       Add any other gitlab.rb configuration here, each on its own line
+#       https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
 
 volumes:
   volume-gitlab-data: {}
